@@ -49,4 +49,11 @@ public class Health : MonoBehaviour
     {
             gameObject.SetActive(false);
     }
+
+    public void ResetHealth()
+    {
+            currentHealth = startingHealth;
+            dead = false;
+            Debug.Log("Health reset to: " + currentHealth);
+    }
 }

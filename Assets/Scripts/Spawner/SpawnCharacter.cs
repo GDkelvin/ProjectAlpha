@@ -6,9 +6,10 @@ public class SpawnCharacter : MonoBehaviour
 {
     [SerializeField] Sprite[] characterSprites;
     [SerializeField] SpriteRenderer characterSilhouette;
-
+    
     GameObject[] characterToSpawn;
 
+    
     private void Start()
     {
         characterSilhouette.sprite = null;
@@ -39,15 +40,38 @@ public class SpawnCharacter : MonoBehaviour
     void AddCharacter()
     {
         if(characterSilhouette.sprite != null){
-            if(Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Space)){
-                Debug.Log("space");
+            if(Input.GetMouseButtonDown(0)){
+                int characterCount = 0;
+
                 for(int i = 0; i < characterToSpawn.Length; i++){
-                    if(!characterToSpawn[i].activeInHierarchy){
+                    if(characterToSpawn[i].activeInHierarchy){
+                        characterCount++;
+                    }
+                }
+
+                if(characterCount < 1){
+                    Debug.Log("added");
+                    
+                    for(int i = 0; i < characterToSpawn.Length; i++){
+                        if(!characterToSpawn[i].activeInHierarchy){
                         characterToSpawn[i].SetActive(true);
                         characterToSpawn[i].transform.position = (Vector2)characterSilhouette.transform.position;
+
+                        //Get the active character to heal
+                        Health characterHealth = characterToSpawn[i].GetComponent<Health>();
+                        if (characterHealth != null)
+                        {
+                            characterHealth.ResetHealth();
+                        }
+
                         characterSilhouette.sprite = null;
-                        break;
+                        return;
                     }
+                    }
+                }
+                else{
+                    Debug.Log("Cant add more than one character");
+                    characterSilhouette.sprite = null;
                 }
             }
         }

@@ -35,8 +35,10 @@ public class EnermyHealth : MonoBehaviour
     }
 
     private void Deactivate()
-   {
-        gameObject.SetActive(false);
-   }
+    {
+            gameObject.SetActive(false);
+    }
+
+        
 
 }

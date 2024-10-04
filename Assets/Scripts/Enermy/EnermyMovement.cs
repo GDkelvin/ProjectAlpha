@@ -7,7 +7,7 @@ public class EnermyMovement : MonoBehaviour
     [SerializeField] private float speed;
     private Animator anim;
     private MeleeEnermy playerInsight;
-    private bool isMoving = false;
+    
 
 
     private void Awake()
